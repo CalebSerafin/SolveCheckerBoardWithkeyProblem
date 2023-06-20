@@ -65,5 +65,80 @@ So now again, using XOR we can find the difference between the same key position
 If the key's is encoded as 101, This tells us to flip a coin at position 111 or index 7. <br/>
 We now flip this coin on the original board, not the simplified one. Giving us a new complex board as 00011101 <br/>
 Using the same technique as before, the reader can encode all the head coin positions on the board as 100, 011, 010, and 000 respectively.
-Combining them with XOR yields an encoded position of 101. Which tells us that the key is at index 5 or drawn on the board as 00100000 <br/>.
- <br/>
+Combining them with XOR yields an encoded position of 101. Which tells us that the key is at index 5 or drawn on the board as 00100000 <br/>
+<br/>
+
+## Example Code
+In this repo there is example C# cope in the Program.cs<br/>
+It was critical to working out and testing candidate solutions.<br/>
+It has a hardcoded example for demonstration purposes.<br/>
+The program produces the following output.<br/>
+```
+Chess Board. 0 represents tails, 1 represents heads:
+00101011    =43
+Key. 1 represents where the key is:
+00001000    =8
+
+
+XOR the encoded positions of all the heads on the board:
+     000    =0
+     001    =1
+     011    =3
+     101    =5
+^
+--------
+00000111    =7
+
+
+Encode the key as it's position:
+00001000    =8
+log2
+--------
+     011    =3
+
+
+XOR the key's position with combined positions of the head coins to get index of position of the coin to flip:
+     011    =3
+     111    =7
+^
+--------
+     100    =4
+
+
+Get the coin which needs to flip:
+     001    =1
+     100    =4
+<<
+--------
+00010000    =16
+
+
+XOR the board with flipped coin to create the new board:
+00101011    =43
+00010000    =16
+^
+--------
+00111011    =59
+
+
+
+
+From the reader's perspective:
+XOR positions of heads in modified board to get the combined position. This is also the position of the key:
+     000    =0
+     001    =1
+     011    =3
+     100    =4
+     101    =5
+^
+--------
+     011    =3
+
+
+What means that if the key is drawn on the board, it will look like:
+     001    =1
+     011    =3
+<<
+--------
+00001000    =8
+```
